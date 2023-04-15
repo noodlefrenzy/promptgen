@@ -47,6 +47,10 @@ Options:
 Commands:
   prompt [options] <string> [data...]  Generate the given prompt
   help [command]                       display help for command
+
+Examples:
+  $ node ./build/src/index.js prompt bing/research topic bugs
+  $ node ./build/src/index.js prompt gpt/challenge-network -f bindings.json
 ```
 
 ```

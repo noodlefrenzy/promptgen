@@ -75,6 +75,16 @@ program
     console.log(`Compiled template:\n${template.compiled(bindings)}`);
   });
 
+program.addHelpText(
+  'after',
+  `
+
+Examples:
+  $ promptgen prompt bing/research topic bugs
+  $ promptgen prompt gpt/challenge-network -f bindings.json
+`
+);
+
 program.showHelpAfterError();
 
 program.parse();
