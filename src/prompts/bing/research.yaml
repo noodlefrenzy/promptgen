@@ -1,0 +1,9 @@
+name: BingResearch
+template: |
+  {{>BingAccurate}}
+  Research {{topic}} and give me a detailed summary from multiple sources.
+description: Basic research prompt
+use-when: you need current and accurate information from the web
+inputs: [topic]
+is-fragment: false
+references: ["bing/accurate"]
