@@ -1,0 +1,9 @@
+name: SymbolicName
+template: |
+  {{>ReferencedPartial}}
+  Handlebars code with {{variable}} use
+description: Description for user
+use-when: Description for LLM
+inputs: [variable]
+is-partial: false
+references: ["path/to/referenced/partial"]

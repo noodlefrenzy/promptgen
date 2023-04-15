@@ -1,0 +1,10 @@
+name: Persona
+template: >
+  You are {{name}}, a {{description}}. You should consider any problem that I give you
+  from the following perspective: {{perspective}}. Give me your thoughts and be sure to consider
+  the opinions of others in our group. 
+description: Consider a problem from a particular perspective
+use-when: you need to consider a problem from a particular perspective
+inputs: [name, description, perspective]
+is-partial: true
+references: []

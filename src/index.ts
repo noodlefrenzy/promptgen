@@ -3,6 +3,57 @@ import * as fs from 'fs';
 import {parse} from 'yaml';
 import * as handlebars from 'handlebars';
 
+function loadTemplate(templateName: string) {
+  console.log(`Attempting to load ${templateName}`);
+  const promptYaml = fs.readFileSync(
+    `./src/prompts/${templateName}.yaml`,
+    'utf8'
+  );
+  const promptData = parse(promptYaml);
+  console.log(`Loaded prompt data: ${JSON.stringify(promptData)}`);
+  if (promptData.references) {
+    promptData.compiledReferences = [];
+    for (const reference of promptData.references) {
+      const referenceData = loadTemplate(reference);
+      const partial = handlebars.compile(referenceData.template);
+      handlebars.registerPartial(referenceData.name, partial);
+      referenceData.compiled = partial;
+      promptData.compiledReferences.push(referenceData);
+    }
+  }
+  promptData.compiled = handlebars.compile(promptData.template);
+  return promptData;
+}
+
+function toMap(data: string[]): {[key: string]: string} {
+  const map: {[key: string]: string} = {};
+  for (let i = 0; i < data.length; i += 2) {
+    map[data[i]] = data[i + 1];
+  }
+  return map;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function loadBindings(options: string[], data: any) {
+  const bindings: {[key: string]: string} = {};
+  console.log(`options: ${options}`);
+  console.log(`data: ${JSON.stringify(data)}`);
+  if ('file' in data) {
+    console.log(`Loading bindings from file: ${options[0]}`);
+    const fileData = fs.readFileSync(options[0], 'utf8');
+    const fileBindings = JSON.parse(fileData);
+    Object.assign(bindings, fileBindings);
+  } else {
+    Object.assign(bindings, toMap(options));
+    console.log(
+      `Converted ${JSON.stringify(options)} to bindings: ${JSON.stringify(
+        bindings
+      )}`
+    );
+  }
+  return bindings;
+}
+
 const program = new Command();
 
 program
@@ -18,27 +69,10 @@ program
   .argument('[data...]', 'Key value pairs of data to bind to the template')
   .action((name, options, data) => {
     console.log(`name: ${name}`);
-    console.log(`options: ${options}`);
-    console.log(`data: ${JSON.stringify(data)}`);
-    console.log(`Attempting to load ${name}`);
-    const promptYaml = fs.readFileSync(`./src/prompts/${name}.yaml`, 'utf8');
-    const promptData = parse(promptYaml);
-    console.log(`Loaded prompt data: ${JSON.stringify(promptData)}`);
-    if (promptData.references) {
-      for (const reference of promptData.references) {
-        console.log(`Reference: ${reference}`);
-        const referenceYaml = fs.readFileSync(
-          `./src/prompts/${reference}.yaml`,
-          'utf8'
-        );
-        const referenceData = parse(referenceYaml);
-        console.log(`Loaded reference data: ${JSON.stringify(referenceData)}`);
-        const partial = handlebars.compile(referenceData.template);
-        handlebars.registerPartial(referenceData.name, partial);
-      }
-    }
-    const template = handlebars.compile(promptData.template);
-    console.log(`Compiled template:\n${template({topic: 'bugs'})}`);
+    const template = loadTemplate(name);
+    const bindings = loadBindings(options, data);
+    console.log(`Bindings: ${JSON.stringify(bindings)}`);
+    console.log(`Compiled template:\n${template.compiled(bindings)}`);
   });
 
 program.showHelpAfterError();
