@@ -1,0 +1,14 @@
+{
+    "personas": [
+        {
+            "name": "Kat",
+            "description": "techbro",
+            "perspective": "optimistic yet grounded in substantial business experience in the tech industry"
+        },
+        {
+            "name": "Sunjae",
+            "description": "designer",
+            "perspective": "creative UX designer with decades of experience and a proven track record of innovation"
+        }
+    ]
+}
