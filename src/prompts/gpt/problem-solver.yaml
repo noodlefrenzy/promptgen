@@ -6,9 +6,9 @@ template: |
     C. "Solve" the problem: Come up with solutions to each piece, keeping the numbering scheme from B. Go deep - don't stop at a surface level solution, but give more specific instructions and areas where it might go wrong or where I need to be more careful.
     D. Iterate: I may tell you to rework given pieces by number by saying "rework 1, 2, and 4" for example
     E. Conclude: If I say "LGTM" you know it's solved - now come up with possible issues with the solution, or ways it can fail once it's in place or during the execution.
-  If you understand say "I got it"
+  {{>Confirm}}
 description: Helps you break a problem down and solve it piece by piece
 use-when: you need to break a problem into pieces
 inputs: []
 is-partial: false
-references: []
+references: ["confirm"]

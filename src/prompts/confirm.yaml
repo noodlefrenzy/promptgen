@@ -1,0 +1,8 @@
+name: Confirm
+template: |
+  Say "I got it" when you understand or ask me clarifying questions if something is unclear.
+description: Used for prompts where you want to start a "session" and you want to confirm that the model has "understood" you or might have more questions.
+use-when: you want a sub-model to confirm its understanding 
+inputs: []
+is-partial: true
+references: []

@@ -12,8 +12,10 @@ template: |
     c) Questions (ask any relevant questions pertaining to what additional information is needed from me to improve the prompt). 
 
   3. We will continue this iterative process with me providing additional information to you and you updating the prompt in the Revised prompt section until it's complete.
+
+  {{>Confirm}}
 description: Useful for workshopping different prompts in a back-and-forth with the model itself
 use-when: You want to work with yourself to generate a more effective prompt
 inputs: []
 is-partial: false
-references: []
+references: ["confirm"]

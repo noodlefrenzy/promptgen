@@ -24,9 +24,9 @@ template: |
       {{>Example }}
     {{/each}}
 
-  Say "I got it" when you understand
+  {{>Confirm}}
 description: Uses GPT models to create prompts for Midjourney, tuned for v5+ (better understanding of long scene descriptions)
 use-when: you need to generate prompts for image generation
 inputs: [examples]
 is-partial: false
-references: ["example"]
+references: ["example", "confirm"]
