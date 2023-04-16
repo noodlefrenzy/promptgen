@@ -2,15 +2,29 @@ import {Command} from 'commander';
 import * as fs from 'fs';
 import {parse} from 'yaml';
 import * as handlebars from 'handlebars';
+import * as winston from 'winston';
+
+const logger = winston.createLogger({
+  level: 'debug',
+  transports: [
+    new winston.transports.Console({
+      level: 'info',
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    }),
+  ],
+});
 
 function loadTemplate(templateName: string) {
-  console.log(`Attempting to load ${templateName}`);
+  logger.debug(`Attempting to load ${templateName}`);
   const promptYaml = fs.readFileSync(
     `./src/prompts/${templateName}.yaml`,
     'utf8'
   );
   const promptData = parse(promptYaml);
-  console.log(`Loaded prompt data: ${JSON.stringify(promptData)}`);
+  logger.debug(`Loaded prompt data: ${JSON.stringify(promptData)}`);
   if (promptData.references) {
     promptData.compiledReferences = [];
     for (const reference of promptData.references) {
@@ -34,19 +48,19 @@ function toMap(data: string[]): {[key: string]: string} {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function loadBindings(options: string[], data: any) {
+function loadBindings(data: string[], options: any) {
   const bindings: {[key: string]: string} = {};
-  console.log(`options: ${options}`);
-  console.log(`data: ${JSON.stringify(data)}`);
-  if ('file' in data) {
-    console.log(`Loading bindings from file: ${options[0]}`);
-    const fileData = fs.readFileSync(options[0], 'utf8');
+  logger.debug(`data: ${data}`);
+  logger.debug(`options: ${JSON.stringify(options)}`);
+  if (options.file) {
+    logger.debug(`Loading bindings from file: ${options.file}`);
+    const fileData = fs.readFileSync(options.file, 'utf8');
     const fileBindings = JSON.parse(fileData);
     Object.assign(bindings, fileBindings);
   } else {
-    Object.assign(bindings, toMap(options));
-    console.log(
-      `Converted ${JSON.stringify(options)} to bindings: ${JSON.stringify(
+    Object.assign(bindings, toMap(data));
+    logger.debug(
+      `Converted ${JSON.stringify(data)} to bindings: ${JSON.stringify(
         bindings
       )}`
     );
@@ -59,20 +73,25 @@ const program = new Command();
 program
   .name('promptgen')
   .description('CLI for managing and generating Foundation Model prompts')
-  .version('0.0.1');
+  .version('0.0.1')
+  .option('-d, --debug', 'Enable debug logging');
 
 program
   .command('prompt')
   .description('Generate the given prompt')
   .argument('<string>', 'prompt name')
-  .option('-f, --file', 'JSON file containing template data bindings')
+  .option('-f, --file <path>', 'JSON file containing template data bindings')
   .argument('[data...]', 'Key value pairs of data to bind to the template')
-  .action((name, options, data) => {
-    console.log(`name: ${name}`);
+  .action((name, data, options) => {
+    if (program.opts().debug) {
+      logger.transports[0].level = 'debug';
+    }
+    logger.debug(`program opts: ${JSON.stringify(program.opts())}`);
+    logger.debug(`name: ${name}`);
     const template = loadTemplate(name);
-    const bindings = loadBindings(options, data);
-    console.log(`Bindings: ${JSON.stringify(bindings)}`);
-    console.log(`Compiled template:\n${template.compiled(bindings)}`);
+    const bindings = loadBindings(data, options);
+    logger.debug(`Bindings: ${JSON.stringify(bindings)}`);
+    console.log(template.compiled(bindings));
   });
 
 program.addHelpText(
