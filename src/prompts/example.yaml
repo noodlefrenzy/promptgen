@@ -1,0 +1,9 @@
+name: Example
+template: |
+  example:
+    {{example}}
+description: Few-shot learning example
+use-when: you need to provide examples for few-shot learning
+inputs: [example]
+is-partial: true
+references: []

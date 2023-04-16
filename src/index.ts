@@ -2,6 +2,7 @@ import {Command} from 'commander';
 import * as fs from 'fs';
 import {parse} from 'yaml';
 import * as handlebars from 'handlebars';
+import * as path from 'path';
 import * as winston from 'winston';
 
 const logger = winston.createLogger({
@@ -55,8 +56,18 @@ function loadBindings(data: string[], options: any) {
   if (options.file) {
     logger.debug(`Loading bindings from file: ${options.file}`);
     const fileData = fs.readFileSync(options.file, 'utf8');
-    const fileBindings = JSON.parse(fileData);
-    Object.assign(bindings, fileBindings);
+    const ext = path.extname(options.file);
+    if (ext === '.yaml' || ext === '.yml') {
+      logger.debug(`Parsing YAML file: ${fileData}`);
+      const fileBindings = parse(fileData);
+      Object.assign(bindings, fileBindings);
+    } else if (ext === '.json') {
+      logger.debug(`Parsing JSON file: ${fileData}`);
+      const fileBindings = JSON.parse(fileData);
+      Object.assign(bindings, fileBindings);
+    } else {
+      throw new Error(`Unsupported file type: ${ext}`);
+    }
   } else {
     Object.assign(bindings, toMap(data));
     logger.debug(
