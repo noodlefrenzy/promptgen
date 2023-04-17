@@ -18,10 +18,10 @@ const logger = winston.createLogger({
   ],
 });
 
-function loadTemplate(templateName: string) {
-  logger.debug(`Attempting to load ${templateName}`);
+function loadTemplate(promptRoot: string, templateName: string) {
+  logger.debug(`Attempting to load ${templateName} from ${promptRoot}`);
   const promptYaml = fs.readFileSync(
-    `./src/prompts/${templateName}.yaml`,
+    `${promptRoot}/${templateName}.yaml`,
     'utf8'
   );
   const promptData = parse(promptYaml);
@@ -29,7 +29,7 @@ function loadTemplate(templateName: string) {
   if (promptData.references) {
     promptData.compiledReferences = [];
     for (const reference of promptData.references) {
-      const referenceData = loadTemplate(reference);
+      const referenceData = loadTemplate(promptRoot, reference);
       const partial = handlebars.compile(referenceData.template);
       handlebars.registerPartial(referenceData.name, partial);
       referenceData.compiled = partial;
@@ -92,6 +92,7 @@ program
   .description('Generate the given prompt')
   .argument('<string>', 'prompt name')
   .option('-f, --file <path>', 'JSON file containing template data bindings')
+  .option('-r, --prompt-root <path>', 'Root path for prompts', './src/prompts')
   .argument('[data...]', 'Key value pairs of data to bind to the template')
   .action((name, data, options) => {
     if (program.opts().debug) {
@@ -99,7 +100,7 @@ program
     }
     logger.debug(`program opts: ${JSON.stringify(program.opts())}`);
     logger.debug(`name: ${name}`);
-    const template = loadTemplate(name);
+    const template = loadTemplate(options.promptRoot, name);
     const bindings = loadBindings(data, options);
     logger.debug(`Bindings: ${JSON.stringify(bindings)}`);
     console.log(template.compiled(bindings));

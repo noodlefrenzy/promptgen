@@ -59,10 +59,11 @@ Usage: promptgen prompt [options] <string> [data...]
 Generate the given prompt
 
 Arguments:
-  string      prompt name
-  data        Key value pairs of data to bind to the template
+  string                    prompt name
+  data                      Key value pairs of data to bind to the template
 
 Options:
-  -f, --file  JSON file containing template data bindings
-  -h, --help  display help for command
+  -f, --file <path>         JSON file containing template data bindings
+  -r, --prompt-root <path>  Root path for prompts (default: "./src/prompts")
+  -h, --help                display help for command
 ```
