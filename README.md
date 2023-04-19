@@ -33,6 +33,12 @@ The separation of `references` and use of `name` in this way allows simple swapp
 
 The goal is to allow command-line overriding of the references to make that sort of experimentation easier.
 
+## Contributing
+
+This project welcomes contributions and suggestions. Although this project is not (yet) under the Microsoft OSS banner, it has adopted the Microsoft Open Source Code of Conduct. For more information see the Code of Conduct FAQ or contact opencode@microsoft.com with any additional questions or comments.
+
+**NOTE** on the code - this is my first TypeScript project since before it was called TypeScript, and my first Node.js project in years. I've been using GitHub Copilot X to help me re-learn the language (from my now-native Python), but if you see areas where I should be doing things differently or have corrections for me - I'm quite happy to hear them either in the form of PR or GitHub Issues.
+
 ## Usage
 
 ```
