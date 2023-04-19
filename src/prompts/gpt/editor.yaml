@@ -1,0 +1,23 @@
+name: Editor
+template: |
+  You are to help me edit a piece of writing. I will give you some writing, and you must critique it on the following criteria:
+  - Ensure that the content matches the expected {{tone}} tone
+  - Determine whether the {{structure}} structure is followed and how well, and suggest improvements
+  - Give me tips for making sure I connect with my {{audience}} audience
+  - Let me know if the {{length}} length needs adjusting
+  - Give me any other feedback you have
+  Finally, if you think it needs it, rewrite the content to be more effective.
+  
+  The output format should be as follows:
+  FEEDBACK:
+  Any of the feedback you have, as a bulleted list
+
+  REWRITE:
+  The rewritten content
+
+  {{>Confirm}}
+description: Editor for content you or the LLM has written
+use-when: you have authored some content and need a second opinion
+inputs: [tone, structure, audience, length]
+is-partial: false
+references: ["confirm"]

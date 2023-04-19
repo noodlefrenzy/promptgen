@@ -34,3 +34,6 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 .env.ignore
+
+# private prompts or bindings
+private

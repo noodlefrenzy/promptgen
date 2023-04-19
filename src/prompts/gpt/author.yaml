@@ -1,0 +1,16 @@
+name: Author
+template: |
+  You are to help me author a piece of content in a {{tone}} tone. This will be for a {{audience}} audience, and should use a {{structure}} structure with a rough {{length}} length.
+
+  The topic is "{{topic}}", 
+  {{#if points}}
+  and you should be sure to cover the following points:
+  {{#each points as |point|}}
+  - {{point}}
+  {{/each}}
+  {{/if}}
+description: Useful for when you want to author a first draft of some content
+use-when: you want to write some natural language content
+inputs: [tone, structure, audience, length, topic, points]
+is-partial: false
+references: ["confirm"]
