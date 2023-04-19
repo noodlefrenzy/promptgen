@@ -1,0 +1,18 @@
+# These are prompts that we've seen fail in GPT-3.5 in various ways.
+failures:
+# Testing words that can play multiple roles (noun, verb, adjective)
+- failure: 
+    prompt: |
+      You are a sentence analyzer. List the adjectives in the following sentence, followed by some synonyms:  I wanted to go to the store to buy mangos but my bike had a flat tire.
+    expected: None
+# Testing ability to reason about the length of words (e.g. past the "next token")
+- failure:
+    prompt:
+      Sort the following list of words by length: banana, apple. pineapple, fig, plantain
+    expected: "fig, apple, banana, plantain, pineapple"
+# Testing ability to reason about the end of words (e.g. past the "next token")
+- failure:
+    prompt:
+      Sort the following list of words by the final letter: banana, apple. pineapple, fig, plantain
+    expected: "banana, apple, pineapple, fig, plantain"
+    
