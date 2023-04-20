@@ -16,6 +16,7 @@ template: |
   - camera: Choose a type of camera (e.g. Leica S3, Canon EOS, etc.), f-stop, lens type, etc. that fits the scene and mood
   - aspect ratio: Select an aspect ratio --ar <n>:<m> where <n> and <m> are integers (e.g. **do not use --ar 2.35:1), that fits the scene and mood (e.g. --ar 1:1 for square, --ar 2:3 for portrait, etc.)
   - style: Add a style flag --stylize <n> where <n> is between 0 and 1000 and 1000 is the most stylized.
+  - model: If the scene seems to be like an anime, add --niji 5, otherwise use --v 5 for the default.
   - Turn these into a **single string** like the examples below, removing parameter names and just leaving the values, so for instance **do not** include "style:"
 
   Here are a few examples:

@@ -56,7 +56,8 @@ Commands:
 
 Examples:
   $ node ./build/src/index.js prompt bing/research topic bugs
-  $ node ./build/src/index.js prompt gpt/challenge-network -f bindings.json
+  $ node ./build/src/index.js prompt gpt/challenge-network -f bindings/personas.json
+  $ node ./build/src/index.js prompt midjourney/gpt-to-mj -f .\bindings\midjourney-examples.yaml
 ```
 
 ```

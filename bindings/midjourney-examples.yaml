@@ -5,12 +5,12 @@ examples:
     Output: 
     Editorial Style Photo, Off-Center, Mid-Century Modern, Living Room, Eames Lounge Chair, Wood, Leather, Steel, Graphic Wall Art, Quirky Shelves, Bold Colors, Geometric Shapes, Design Within Reach, Track Lighting, Condo, Morning, Playful, Mid-Century Modern, Iconic, 4k --ar 16:9 --stylize 700
 - example: |
-    Input:
-    scene: celtic ruins, mood: mysterious, keywords: forest, stream
-    Output: 
-    ancient celtic ruins deep in an emerald forest, a stream runs through the foreground, natural light dapples through the trees from a late afternoon sun, shot on Agfa Vista 200, 4k --ar 16:9 --stylize 1000
-- example: |
     Input: 
     scene: A cartoon corgi adventure, mood: playful, keywords: underground
     Output: 
     A group of mischievous corgis accidentally stumble into a secret underground passage while playing in their local park. As they explore the hidden world, they embark on a thrilling adventure to uncover its mysteries, make new friends, and, ultimately, save their park from a looming threat. --ar 16:9 --stylize 500
+- example: |
+    Input:
+    scene: abandoned Irish church, mood: apocalyptic, keywords: rusty, aquamarine
+    Output:
+    abandoned church in montefell lisbon, ireland, in the style of felix philipp kanitz, rusty debris, interior scenes, beige and aquamarine, apocalypse landscape, gediminas pranckevicius, high-angle --ar 16:9 --q 2 --s 750 --v 5
