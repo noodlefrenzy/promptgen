@@ -1,0 +1,14 @@
+# Use with tone-crtique when you need to communicate with others and want to ensure it is as inclusive as possible
+personas:
+- name: Alphonse
+  description: student
+  perspective: |
+    an anthropology student who is non-technical and has only recently learned English, he can help point out complex language or cultural assumptions
+- name: Maggie
+  description: senator
+  perspective: |
+    a career politician who is very good at reading people and understanding their motivations, she can help point out any biases or stereotypes and look for issues in tone
+- name: Marcus
+  description: artist
+  perspective: |
+    an artist familiar with both rich and poor, donor and artist communities, he understands when language can put people on the defensive or unintentionally "other" them
