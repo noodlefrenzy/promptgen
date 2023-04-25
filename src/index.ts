@@ -49,25 +49,24 @@ function toMap(data: string[]): {[key: string]: string} {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function loadBindings(data: string[], options: any) {
+function loadBindings(
+  data: string[],
+  options: any,
+  defaultRoot = './bindings'
+) {
   const bindings: {[key: string]: string} = {};
   logger.debug(`data: ${data}`);
   logger.debug(`options: ${JSON.stringify(options)}`);
   if (options.file) {
-    logger.debug(`Loading bindings from file: ${options.file}`);
-    const fileData = fs.readFileSync(options.file, 'utf8');
-    const ext = path.extname(options.file);
-    if (ext === '.yaml' || ext === '.yml') {
-      logger.debug(`Parsing YAML file: ${fileData}`);
-      const fileBindings = parse(fileData);
-      Object.assign(bindings, fileBindings);
-    } else if (ext === '.json') {
-      logger.debug(`Parsing JSON file: ${fileData}`);
-      const fileBindings = JSON.parse(fileData);
-      Object.assign(bindings, fileBindings);
-    } else {
-      throw new Error(`Unsupported file type: ${ext}`);
+    const filePath = path.resolve(defaultRoot, options.file + '.yaml');
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Bindings file not found: ${filePath}`);
     }
+    logger.debug(`Loading bindings from file: ${filePath}`);
+    const fileData = fs.readFileSync(filePath, 'utf8');
+    logger.debug(`Parsing YAML file: ${fileData}`);
+    const fileBindings = parse(fileData);
+    Object.assign(bindings, fileBindings);
   } else {
     Object.assign(bindings, toMap(data));
     logger.debug(
@@ -91,7 +90,10 @@ program
   .command('prompt')
   .description('Generate the given prompt')
   .argument('<string>', 'prompt name')
-  .option('-f, --file <path>', 'JSON file containing template data bindings')
+  .option(
+    '-f, --file <path>',
+    'YAML file containing template data bindings (directory assumed to be ./bindings, .yaml extension assumed)'
+  )
   .option('-r, --prompt-root <path>', 'Root path for prompts', './src/prompts')
   .argument('[data...]', 'Key value pairs of data to bind to the template')
   .action((name, data, options) => {
@@ -112,7 +114,8 @@ program.addHelpText(
 
 Examples:
   $ promptgen prompt bing/research topic bugs
-  $ promptgen prompt gpt/challenge-network -f bindings.json
+  $ promptgen prompt gpt/challenge-network -f challenge-personas
+  $ promptgen prompt midjourney/gpt-to-mj -f midjourney-examples
 `
 );
 

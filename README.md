@@ -48,16 +48,18 @@ CLI for managing and generating Foundation Model prompts
 
 Options:
   -V, --version                        output the version number
+  -d, --debug                          Enable debug logging
   -h, --help                           display help for command
 
 Commands:
   prompt [options] <string> [data...]  Generate the given prompt
   help [command]                       display help for command
 
+
 Examples:
-  $ node ./build/src/index.js prompt bing/research topic bugs
-  $ node ./build/src/index.js prompt gpt/challenge-network -f bindings/personas.json
-  $ node ./build/src/index.js prompt midjourney/gpt-to-mj -f .\bindings\midjourney-examples.yaml
+  $ promptgen prompt bing/research topic bugs
+  $ promptgen prompt gpt/challenge-network -f challenge-personas
+  $ promptgen prompt midjourney/gpt-to-mj -f midjourney-examples
 ```
 
 ```
@@ -70,7 +72,9 @@ Arguments:
   data                      Key value pairs of data to bind to the template
 
 Options:
-  -f, --file <path>         JSON file containing template data bindings
+  -f, --file <path>         YAML file containing template data bindings
+                            (directory assumed to be ./bindings, .yaml
+                            extension assumed)
   -r, --prompt-root <path>  Root path for prompts (default: "./src/prompts")
   -h, --help                display help for command
 ```
