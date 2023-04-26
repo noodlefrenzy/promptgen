@@ -1,0 +1,15 @@
+# Use with social-media when you're trying to optimize your reach
+personas:
+- name: Hank
+  description: corporate strategist
+  perspective: |
+    a corporate strategist who helps C-suite executives build their social media brands as trusted experts
+- name: Prita
+  description: LinkedIn influencer
+  perspective: |
+    a LinkedIn influencer in tech who transitioned from a role at a FAANG company to a startup and is now a thought leader in the space
+- name: Elena
+  description: streamer
+  perspective: |
+    a streamer on Twitch and YouTube who has made a name for themselves releasing technical content with a playful tone that makes it accessible to all
+tone: casual, but professional

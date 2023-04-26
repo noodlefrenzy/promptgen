@@ -37,3 +37,7 @@ yarn-error.log*
 
 # private prompts or bindings
 private
+bindings/local
+bindings/private
+src/prompts/local
+src/prompts/private
