@@ -7,7 +7,10 @@ failures:
     expected: None
 # Testing ability to reason about the end of words (e.g. past the "next token")
 - failure:
-    prompt:
+    prompt: |
       Sort the following list of words by the final letter: banana, apple. pineapple, fig, plantain
     expected: "banana, apple, pineapple, fig, plantain"
-    
+- failure:
+    prompt: |
+      Question: You have a 12 litre jug and a 6 litre jug. I want to measure 6 litres. How do I do it?
+    expected: Fill the 6 litre jug.
