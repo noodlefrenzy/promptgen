@@ -14,3 +14,11 @@ failures:
     prompt: |
       Question: You have a 12 litre jug and a 6 litre jug. I want to measure 6 litres. How do I do it?
     expected: Fill the 6 litre jug.
+- failure:
+    prompt: |
+      Question: Would I get a flat tire by bicycling over a bridge that is suspended over nails, screws, and broken glass?
+    expected: No. The tire would not be damaged.
+- failure:
+    prompt: |
+      Question: I left 5 clothes to dry out in the sun. It took them 5 hours to dry completely. How long would it take to dry 30 clothes?
+    expected: It would take 5 hours to dry.
