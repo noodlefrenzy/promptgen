@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@types/node": "^20.1.0",
+    "@types/node": "^20.4.2",
     "gts": "^3.1.1",
     "typescript": "~5.0.4"
   },
