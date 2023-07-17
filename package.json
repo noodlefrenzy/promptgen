@@ -23,7 +23,7 @@
   "dependencies": {
     "commander": "^10.0.1",
     "handlebars": "^4.7.7",
-    "winston": "^3.8.2",
+    "winston": "^3.10.0",
     "yaml": "^2.2.2"
   }
 }
