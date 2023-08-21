@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@types/node": "^20.1.0",
+    "@types/node": "^20.4.8",
     "gts": "^3.1.1",
-    "typescript": "~5.0.4"
+    "typescript": "~5.1.6"
   },
   "scripts": {
     "lint": "gts lint",
@@ -21,9 +21,9 @@
     "posttest": "yarn run lint"
   },
   "dependencies": {
-    "commander": "^10.0.1",
+    "commander": "^11.0.0",
     "handlebars": "^4.7.7",
     "winston": "^3.10.0",
-    "yaml": "^2.2.2"
+    "yaml": "^2.3.1"
   }
 }
