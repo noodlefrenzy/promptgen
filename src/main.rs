@@ -94,6 +94,13 @@ fn to_map(data: &[String]) -> HashMap<String, Value> {
         i += 2;
     }
     
+    // Check if there's an unpaired element at the end
+    if i < data.len() {
+        // We have an odd number of elements, handle the last one
+        eprintln!("Warning: Unpaired key '{}' found. Setting to empty string value.", data[i]);
+        map.insert(data[i].clone(), Value::String(String::new()));
+    }
+    
     map
 }
 
