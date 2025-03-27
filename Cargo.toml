@@ -1,0 +1,16 @@
+[package]
+name = "promptgen"
+version = "1.0.0"
+edition = "2021"
+authors = ["Michael Lanzetta <milanz@microsoft.com>"]
+description = "CLI for managing and generating Foundation Model prompts"
+license = "MIT"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1.0"
+handlebars = "4.5"
+log = "0.4"
+env_logger = "0.11"
